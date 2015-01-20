@@ -5,11 +5,11 @@ Currently in development. The idea behind this is that an immersive environment 
 
 example script in the current version:
 
-import UnityEngine as unity
+    import UnityEngine as unity
 
-def createCube(x, color):
-  cube = unity.GameObject.CreatePrimitive(unity.PrimitiveType.Cube)
-  cube.transform.position = unity.Vector3(x , 4, 2)
-  cube.renderer.material.color = color
-  
-createCube(2, unity.Color.blue)
+    def createCube(x, color):
+      cube = unity.GameObject.CreatePrimitive(unity.PrimitiveType.Cube)
+      cube.transform.position = unity.Vector3(x , 4, 2)
+      cube.renderer.material.color = color
+    createCube(2, unity.Color.blue)
+
