@@ -35,9 +35,9 @@ public class PythonInterpreter : MonoBehaviour {
 		scope = engine.CreateScope ();
 
 		engine.Runtime.LoadAssembly (typeof(GameObject).Assembly);
-	//	string init = "import UnityEngine as unity";
-	//	source = engine.CreateScriptSourceFromString (init);
-		//source.Execute (scope);
+		string init = "import UnityEngine as unity";
+		source = engine.CreateScriptSourceFromString (init);
+		source.Execute (scope);
 	}
 
 	string[] getCodeLines() {
