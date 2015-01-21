@@ -9,7 +9,7 @@ using Microsoft.Scripting.Hosting;
 
 
 public class PythonInterpreter : MonoBehaviour {
-	public Text codeText = null;
+	public InputField input = null;
 	private string codeStr;
 	private string lastCodeStr;
 	private ScriptEngine engine;
@@ -25,8 +25,8 @@ public class PythonInterpreter : MonoBehaviour {
 	private Dictionary<string, GameObject> createdObjects;
 
 	void Start () {
-		codeStr = codeText.text;
-		lastCodeStr = codeText.text;
+		codeStr = input.text;
+		lastCodeStr = input.text;
 
 		oldLines = new ArrayList ();
 		newLines = new ArrayList ();
@@ -41,7 +41,7 @@ public class PythonInterpreter : MonoBehaviour {
 	}
 
 	string[] getCodeLines() {
-		codeStr = codeText.text;
+		codeStr = input.text;
 		return codeStr.Split('\n');
 	}
 
@@ -101,8 +101,8 @@ public class PythonInterpreter : MonoBehaviour {
 	}
 
 	void Update() {
-		codeStr = codeText.text;
-
+		codeStr = input.text;
+	//	print (codeText.guiText.text);
 		if (codeStr != lastCodeStr) {
 			source = engine.CreateScriptSourceFromString(codeStr);
 			clearCreatedObjects();
@@ -113,7 +113,7 @@ public class PythonInterpreter : MonoBehaviour {
 	}
 
 	void OlderUpdate () {
-		codeStr = codeText.text;
+		codeStr = input.text;
 		string[] codeBody = codeStr.Split ('\n');
 		codeLineLen = codeBody.Length;
 	
