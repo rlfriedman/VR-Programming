@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using IronPython;
 using IronPython.Modules;
 using Microsoft.Scripting.Hosting;
@@ -21,6 +22,8 @@ public class PythonInterpreter : MonoBehaviour {
 	private ArrayList oldLines;
 	private ArrayList newLines;
 
+	private Dictionary<string, GameObject> createdObjects;
+
 	void Start () {
 		codeStr = codeText.text;
 		lastCodeStr = codeText.text;
@@ -32,9 +35,9 @@ public class PythonInterpreter : MonoBehaviour {
 		scope = engine.CreateScope ();
 
 		engine.Runtime.LoadAssembly (typeof(GameObject).Assembly);
-		string init = "import UnityEngine as unity";
-		source = engine.CreateScriptSourceFromString (init);
-		source.Execute (scope);
+	//	string init = "import UnityEngine as unity";
+	//	source = engine.CreateScriptSourceFromString (init);
+		//source.Execute (scope);
 	}
 
 	string[] getCodeLines() {
@@ -77,8 +80,39 @@ public class PythonInterpreter : MonoBehaviour {
 		oldLines = newLines;
 	}
 
+	void clearCreatedObjects() {
+		IEnumerable objects = scope.GetItems();
 
-	void Update () {
+	//	print (scope.GetVariable<string>("m"));
+	//	foreach (string name in scope.GetVariableNames()) {
+	//		print (name);
+	//	}
+		// issue with import creating multiple import names...
+		foreach (KeyValuePair<string, object> obj in objects) {
+			print (obj.Key);
+			if (obj.Key != "__doc__")  {
+				if (obj.Value.GetType() == typeof(GameObject)) {
+					GameObject gameObj = (GameObject)obj.Value;
+					Destroy (gameObj);
+					scope.RemoveVariable(obj.Key);
+				}
+			}
+		}
+	}
+
+	void Update() {
+		codeStr = codeText.text;
+
+		if (codeStr != lastCodeStr) {
+			source = engine.CreateScriptSourceFromString(codeStr);
+			clearCreatedObjects();
+
+			source.Execute(scope);
+		}
+		lastCodeStr = codeStr;
+	}
+
+	void OlderUpdate () {
 		codeStr = codeText.text;
 		string[] codeBody = codeStr.Split ('\n');
 		codeLineLen = codeBody.Length;
@@ -87,6 +121,7 @@ public class PythonInterpreter : MonoBehaviour {
 			print ("new code added");
 			print (codeStr.Length);
 			source = engine.CreateScriptSourceFromString(codeStr);
+
 			source.Execute(scope);
 			alreadyExecuted = true;
 			//string came_from_script = scope.GetVariable<string>("m");  
