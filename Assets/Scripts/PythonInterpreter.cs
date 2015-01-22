@@ -22,6 +22,7 @@ public class PythonInterpreter : MonoBehaviour {
 	private ArrayList oldLines;
 	private ArrayList newLines;
 
+
 	private Dictionary<string, GameObject> createdObjects;
 
 	void Start () {
@@ -38,6 +39,9 @@ public class PythonInterpreter : MonoBehaviour {
 		string init = "import UnityEngine as unity";
 		source = engine.CreateScriptSourceFromString (init);
 		source.Execute (scope);
+		source = engine.CreateScriptSourceFromFile ("Assets/PythonScripts/cubeCreate.py");
+		source.Execute(scope);
+
 	}
 
 	string[] getCodeLines() {
@@ -80,13 +84,22 @@ public class PythonInterpreter : MonoBehaviour {
 		oldLines = newLines;
 	}
 
+
+
+	void destroyGameObjects() {
+		GameObject[] objects = FindObjectsOfType<GameObject> ();
+
+		for (int i = 0; i < objects.Length; i++) {
+			string tag = objects[i].tag;
+			if (tag != "Scene" && tag != "Player") {
+				Destroy(objects[i]);
+			}
+		}
+	}
+
 	void clearCreatedObjects() {
 		IEnumerable objects = scope.GetItems();
 
-	//	print (scope.GetVariable<string>("m"));
-	//	foreach (string name in scope.GetVariableNames()) {
-	//		print (name);
-	//	}
 		// issue with import creating multiple import names...
 		foreach (KeyValuePair<string, object> obj in objects) {
 			print (obj.Key);
@@ -98,15 +111,15 @@ public class PythonInterpreter : MonoBehaviour {
 				}
 			}
 		}
+
+		destroyGameObjects ();
 	}
 
 	void Update() {
 		codeStr = input.text;
-	//	print (codeText.guiText.text);
 		if (codeStr != lastCodeStr) {
 			source = engine.CreateScriptSourceFromString(codeStr);
 			clearCreatedObjects();
-
 			source.Execute(scope);
 		}
 		lastCodeStr = codeStr;
