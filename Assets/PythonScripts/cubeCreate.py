@@ -8,7 +8,6 @@ def createCube(x, y, z, color):
 	c.renderer.material.color = color
 	c.transform.position = unity.Vector3(x, y, z)
 
-
 class Cube():
 	def __init__(self, x, y, z, color):
 		self._x = x
@@ -20,7 +19,7 @@ class Cube():
 		self._object.renderer.material.color = self._color
 
 
-	def setColor(self, newColor):
+	def changeColor(self, newColor):
 		self._object.renderer.material.color = newColor
 
 class Sphere():
@@ -34,5 +33,5 @@ class Sphere():
 		self._object.renderer.material.color = self._color
 
 
-	def setColor(self, newColor):
+	def changeColor(self, newColor):
 		self._object.renderer.material.color = newColor

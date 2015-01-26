@@ -14,7 +14,7 @@ public class ObjectLookInput : MonoBehaviour {
 		RaycastHit hit;
 
 		if (Physics.Raycast (centerCamera.transform.position, Vector3.forward, out hit)) {
-			print(hit.collider.gameObject.name);
+			print(hit.transform.name);
 		}
 
 	}
