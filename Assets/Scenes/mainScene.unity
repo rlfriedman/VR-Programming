@@ -980,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerCamera: {fileID: 1303300648}
-  label: {fileID: 596041741}
+  label: {fileID: 798305018}
   playerController: {fileID: 1040214344}
   labelsOn: 1
 --- !u!92 &1103367811

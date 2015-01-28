@@ -17,12 +17,18 @@ public class ObjectLookInput : MonoBehaviour {
 		if (labelsOn) {
 			RaycastHit hit;
 			if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) {
-				print(hit.transform.name);
 				if (hit.transform.tag != "Scene") {
-					label.text = hit.transform.name;
+
+					if (hit.transform.parent != null) { // if object a part of a larger one, display its name
+						label.text = hit.transform.parent.name;
+					}
+					else {
+						label.text = hit.transform.name;
+					}
+
 					label.color = new Color(1, 1,1, 1);
 					float labelScaleX;
-					if (playerController.transform.position.z > hit.transform.position.z) {
+					if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
 						labelScaleX = -.05f;
 					}
 					else {

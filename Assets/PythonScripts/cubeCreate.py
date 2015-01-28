@@ -2,6 +2,7 @@ red = unity.Color.red
 blue = unity.Color.blue
 green = unity.Color.green
 yellow = unity.Color.yellow
+white = unity.Color.white
 
 def createCube(x, y, z, color):
 	c = unity.GameObject.CreatePrimitive(unity.PrimitiveType.Cube)
@@ -35,3 +36,20 @@ class Sphere():
 
 	def changeColor(self, newColor):
 		self._object.renderer.material.color = newColor
+
+	def getTransform(self):
+		return self._object.transform
+
+
+class Snowman():
+	def __init__(self, x, y, z):
+		self._head = Sphere(x, y + 1, z, white)
+		self._body = Sphere(x, y, z, white)
+		self._bottom = Sphere(x, y - 1, z, white)
+		self._obj = unity.GameObject()
+		self._obj.name = "Snowman"
+		self._head.getTransform().parent = self._obj.transform
+		self._body.getTransform().parent = self._obj.transform
+		self._bottom.getTransform().parent = self._obj.transform
+		#self._obj.AddComponent(unity.Text)
+

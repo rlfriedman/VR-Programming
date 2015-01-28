@@ -58,6 +58,7 @@ public class PythonInterpreter : MonoBehaviour {
 		foreach (KeyValuePair<string, object> obj in objects) {
 			//print (obj.Key);
 			if (obj.Key != "__doc__")  {
+				print (obj.Key);
 				if (obj.Value.GetType() == typeof(GameObject)) {
 					GameObject gameObj = (GameObject)obj.Value;
 					Destroy (gameObj);
