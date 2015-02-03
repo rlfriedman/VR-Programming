@@ -13,9 +13,9 @@ public class PythonInterpreter : MonoBehaviour {
 	public InputField input = null;
 	private string codeStr;
 	private string lastCodeStr;
-	private ScriptEngine engine;
-	private ScriptScope scope;
-	private ScriptSource source;
+	public static ScriptEngine engine;
+	public static ScriptScope scope;
+	public static ScriptSource source;
 
 	private Dictionary<string, GameObject> createdObjects;
 

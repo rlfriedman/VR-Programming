@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using IronPython;
+using IronPython.Modules;
+using Microsoft.Scripting.Hosting;
+
 
 public class ObjectLookInput : MonoBehaviour {
 	public GameObject centerCamera;
@@ -11,7 +17,26 @@ public class ObjectLookInput : MonoBehaviour {
 	void Start () {
 		
 	}
-	
+
+	string getVarName(GameObject selectedObj) {
+		IEnumerable objects = PythonInterpreter.scope.GetItems();
+
+		foreach (KeyValuePair<string, object> obj in objects) {
+			if (obj.Key != "__doc__")  {
+				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance)) {
+					object instance = obj.Value;
+					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject");
+					GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method);
+					if (instanceObj == selectedObj) {
+						return obj.Key;
+					}
+				}
+			}
+		}
+		return "";
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 		if (labelsOn) {
@@ -21,9 +46,12 @@ public class ObjectLookInput : MonoBehaviour {
 
 					if (hit.transform.parent != null) { // if object a part of a larger one, display its name
 						label.text = hit.transform.parent.name;
+						label.text = getVarName(hit.transform.parent.gameObject);
 					}
 					else {
 						label.text = hit.transform.name;
+
+						label.text = getVarName(hit.transform.gameObject);
 					}
 
 					label.color = new Color(1, 1,1, 1);
