@@ -53,15 +53,11 @@ public class PythonInterpreter : MonoBehaviour {
 
 	void clearCreatedObjects() {
 		IEnumerable objects = scope.GetItems();
-
+		// clear out environment variables
 		// issue with import creating multiple import names...
 		foreach (KeyValuePair<string, object> obj in objects) {
-			//print (obj.Key);
 			if (obj.Key != "__doc__")  {
-				print (obj.Key);
-				if (obj.Value.GetType() == typeof(GameObject)) {
-					GameObject gameObj = (GameObject)obj.Value;
-					Destroy (gameObj);
+				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance)) {
 					scope.RemoveVariable(obj.Key);
 				}
 			}
@@ -69,8 +65,26 @@ public class PythonInterpreter : MonoBehaviour {
 		destroyGameObjects ();
 	}
 
+	void UpdateObjects() { // execute each class instance's update function, all must have an update
+
+		IEnumerable objects = scope.GetItems();
+
+		foreach (KeyValuePair<string, object> obj in objects) {
+			if (obj.Key != "__doc__")  {
+				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance)) {
+					string updateCall = obj.Key + ".update()\n";
+					//print (updateCall);
+					source = engine.CreateScriptSourceFromString(updateCall);
+					source.Execute(scope);
+				}
+			}
+		}
+	}
+
 	void Update() {
 		codeStr = input.text;
+		UpdateObjects();
+
 		if (codeStr != lastCodeStr) {
 			source = engine.CreateScriptSourceFromString(codeStr);
 			clearCreatedObjects();

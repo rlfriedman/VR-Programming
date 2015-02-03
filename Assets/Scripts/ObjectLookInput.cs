@@ -17,7 +17,7 @@ public class ObjectLookInput : MonoBehaviour {
 		if (labelsOn) {
 			RaycastHit hit;
 			if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) {
-				if (hit.transform.tag != "Scene") {
+				if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
 
 					if (hit.transform.parent != null) { // if object a part of a larger one, display its name
 						label.text = hit.transform.parent.name;

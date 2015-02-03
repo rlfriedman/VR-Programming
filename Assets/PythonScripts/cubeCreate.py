@@ -18,6 +18,21 @@ class Cube():
 		self._object = unity.GameObject.CreatePrimitive(unity.PrimitiveType.Cube)
 		self._object.transform.position = unity.Vector3(x, y, z)
 		self._object.renderer.material.color = self._color
+		self.moving = False
+		self.moveSpeed = 5
+		self.rotating = False
+		self.rotateSpeed = 5
+
+	def move(self, speed):
+		self.moveSpeed = speed
+		self.moving = True
+
+	def rotate(self, speed):
+		self.rotateSpeed = speed
+		self.rotating = True
+
+	def stopRotating(self):
+		self.rotating = False
 
 	def moveForward(self, z):
 		self._object.transform.position = unity.Vector3(self._object.transform.position.x, self._object.transform.position.y, self._object.transform.position.z + z)
@@ -29,6 +44,14 @@ class Cube():
 	def getColor(self):
 		return self._object.renderer.material.color
 
+	def update(self):
+		if self.moving:
+			newPos = unity.Vector3(self._object.transform.position.x, self._object.transform.position.y, self._object.transform.position.z + self.moveSpeed)
+			self._object.transform.position = unity.Vector3.Lerp(self._object.transform.position, newPos, unity.Time.deltaTime)
+			self.moving = False
+
+		if self.rotating:
+			self._object.transform.Rotate(unity.Vector3.up, self.rotateSpeed * unity.Time.deltaTime)
 
 class Sphere():
 	def __init__(self, x, y, z, color):
@@ -47,6 +70,8 @@ class Sphere():
 	def getTransform(self):
 		return self._object.transform
 
+	def update(self):
+		pass
 
 class Snowman():
 	def __init__(self, x, y, z):
@@ -58,5 +83,8 @@ class Snowman():
 		self._head.getTransform().parent = self._obj.transform
 		self._body.getTransform().parent = self._obj.transform
 		self._bottom.getTransform().parent = self._obj.transform
+
+	def update(self):
+		pass
 		#self._obj.AddComponent(unity.Text)
 
