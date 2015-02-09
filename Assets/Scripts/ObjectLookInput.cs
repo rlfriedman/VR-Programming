@@ -25,8 +25,8 @@ public class ObjectLookInput : MonoBehaviour {
 			if (obj.Key != "__doc__")  {
 				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance)) {
 					object instance = obj.Value;
-					print(PythonInterpreter.engine.Operations.GetCallSignatures(instance));
-					print(PythonInterpreter.engine.Operations.GetMemberNames(instance));
+					//print(PythonInterpreter.engine.Operations.GetCallSignatures(instance));
+					//print(PythonInterpreter.engine.Operations.GetMemberNames(instance));
 					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject");
 					GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method);
 					if (instanceObj == selectedObj) {
