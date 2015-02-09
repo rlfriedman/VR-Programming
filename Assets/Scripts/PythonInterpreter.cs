@@ -68,12 +68,13 @@ public class PythonInterpreter : MonoBehaviour {
 	void UpdateObjects() { // execute each class instance's update function, all must have an update
 
 		IEnumerable objects = scope.GetItems();
+		ArrayList updatedObjects = new ArrayList();
 
 		foreach (KeyValuePair<string, object> obj in objects) {
 			if (obj.Key != "__doc__")  {
-				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance)) {
+				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance) && !updatedObjects.Contains(obj.Value)) {
 					string updateCall = obj.Key + ".update()\n";
-					//print (updateCall);
+					updatedObjects.Add(obj.Value); // don't update already updated objects
 					source = engine.CreateScriptSourceFromString(updateCall);
 					source.Execute(scope);
 				}
