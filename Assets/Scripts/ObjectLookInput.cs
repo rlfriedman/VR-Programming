@@ -84,49 +84,46 @@ public class ObjectLookInput : MonoBehaviour {
 	void Update () {
 
 		objects = PythonInterpreter.scope.GetItems(); // get current objects
-		if (!labelsOn) { // no labels, non-learning settings
-			label.text = "";
-			attributeField.gameObject.SetActive(false);
+		if (!labelsOn) { // no labels, non-learning settings so don't do anything
 			return;
 		}
 
 		RaycastHit hit;
 		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
-			if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
-				attributeField.gameObject.SetActive(true);
-				object instance;
-				if (hit.transform.parent != null) { // if object a part of a larger one, display its name
-					instance = getInstance(hit.transform.parent.gameObject);
-					label.text = hit.transform.parent.name;
-				}
-				else {
-					instance = getInstance(hit.transform.gameObject);
-					label.text = hit.transform.name;
-				}
+						if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
+								attributeField.gameObject.SetActive (true);
+								object instance;
+								if (hit.transform.parent != null) { // if object a part of a larger one, display its name
+										instance = getInstance (hit.transform.parent.gameObject);
+										label.text = hit.transform.parent.name;
+								} else {
+										instance = getInstance (hit.transform.gameObject);
+										label.text = hit.transform.name;
+								}
 
-				label.text = getVarName(instance);  // set label to var name
+								label.text = getVarName (instance);  // set label to var name
 
-				ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
+								ArrayList instanceVars = getInstanceVars (instance); // all instance variable names
 
-				displayInstanceVars(instanceVars, instance);
+								displayInstanceVars (instanceVars, instance);
 
-				label.color = new Color(1, 1,1, 1);
-				float labelScaleX;
-				if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
-					labelScaleX = -.05f;
-				}
-				else {
-					labelScaleX = .05f;
-				}
-				label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
-				label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
-				attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
-				attributeField.transform.position = new Vector3(hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
-			}
+								label.color = new Color (1, 1, 1, 1);
+								float labelScaleX;
+								if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
+										labelScaleX = -.05f;
+								} else {
+										labelScaleX = .05f;
+								}
+								label.transform.localScale = new Vector3 (labelScaleX, .05f, 1f);
+								label.transform.position = new Vector3 (hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
+								attributeField.transform.localScale = new Vector3 (.1f, .05f, 1f);
+								attributeField.transform.position = new Vector3 (hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
+						}
+		} 
+		else {
+			label.text = "";
+			attributeField.gameObject.SetActive (false);
 		}
-		
-
-
 	}
 }
 
