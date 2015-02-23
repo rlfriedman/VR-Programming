@@ -23,14 +23,14 @@ public class PythonInterpreter : MonoBehaviour {
 		codeStr = input.text;
 		lastCodeStr = input.text;
 
-		engine = IronPython.Hosting.Python.CreateEngine ();
-		scope = engine.CreateScope ();
+		engine = IronPython.Hosting.Python.CreateEngine(); // setup python engine
+		scope = engine.CreateScope();
 
-		engine.Runtime.LoadAssembly (typeof(GameObject).Assembly);
+		engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
 		string init = "import UnityEngine as unity";
 		source = engine.CreateScriptSourceFromString (init);
-		source.Execute (scope);
-		source = engine.CreateScriptSourceFromFile ("Assets/PythonScripts/cubeCreate.py");
+		source.Execute(scope); 
+		source = engine.CreateScriptSourceFromFile ("Assets/PythonScripts/cubeCreate.py"); // load any external files in here and execute
 		source.Execute(scope);
 
 	}
@@ -40,7 +40,7 @@ public class PythonInterpreter : MonoBehaviour {
 		return codeStr.Split('\n');
 	}
 
-	void destroyGameObjects() {
+	void destroyGameObjects() {  // destroy any objects not stored in variables
 		GameObject[] objects = FindObjectsOfType<GameObject> ();
 
 		for (int i = 0; i < objects.Length; i++) {
@@ -51,7 +51,7 @@ public class PythonInterpreter : MonoBehaviour {
 		}
 	}
 
-	void clearCreatedObjects() {
+	void clearCreatedObjects() { // clear world for re-execution of code
 		IEnumerable objects = scope.GetItems();
 		// clear out environment variables
 		// issue with import creating multiple import names...
@@ -62,7 +62,7 @@ public class PythonInterpreter : MonoBehaviour {
 				}
 			}
 		}
-		destroyGameObjects ();
+		destroyGameObjects();
 	}
 
 	void UpdateObjects() { // execute each class instance's update function, all must have an update

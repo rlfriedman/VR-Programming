@@ -7,7 +7,7 @@ using IronPython;
 using IronPython.Modules;
 using Microsoft.Scripting.Hosting;
 
-
+// look at an object in VR to see more information about it
 public class ObjectLookInput : MonoBehaviour {
 	public GameObject centerCamera;
 	public Text label;
@@ -22,7 +22,8 @@ public class ObjectLookInput : MonoBehaviour {
 		operations = PythonInterpreter.engine.Operations;
 	}
 
-	ArrayList getInstanceVars(object instance) {
+	// get an object's instance variable names
+	ArrayList getInstanceVars(object instance) {  
 		ArrayList instanceVars = new ArrayList ();
 		foreach (var name in operations.GetMemberNames(instance)) {
 			object member = operations.GetMember(instance, name);
@@ -34,7 +35,8 @@ public class ObjectLookInput : MonoBehaviour {
 		return instanceVars;
 	}
 
-	string getVarName(object instance) { // gets the first variable name the object is stored under
+	// gets the first variable name the object is stored under
+	string getVarName(object instance) { 
 		foreach (KeyValuePair<string, object> obj in objects) {
 			if (obj.Key != "__doc__") {
 				if (obj.Value == instance) {
@@ -45,13 +47,16 @@ public class ObjectLookInput : MonoBehaviour {
 		return "";
 	}
 
-	object getInstance(GameObject selectedObj) { // returns the IronPython OldInstance of the class we are currently looking at
+	// returns the IronPython OldInstance of the class we are currently looking at in VR
+	object getInstance(GameObject selectedObj) { 
 		foreach (KeyValuePair<string, object> obj in objects) {
 			if (obj.Key != "__doc__")  {
 				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance)) {
 					object instance = obj.Value;
-					
-					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject");
+
+					// each python class should have a getObject method which returns
+					// the main game object for that class
+					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject");  
 					
 					GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method);
 					if (instanceObj == selectedObj) {
@@ -63,64 +68,65 @@ public class ObjectLookInput : MonoBehaviour {
 		return null;
 	}
 
-	void displayInstanceVars(ArrayList instanceVars, object instance) {
+	// displays instance variables on screen near selected object
+	void displayInstanceVars(ArrayList instanceVars, object instance) { 
 		string display = "";
 
 		for (int i = 0; i < instanceVars.Count; i++) {
 			string name = (string)instanceVars[i];
 			string value = operations.GetMember(instance, name).ToString();
-			display += instanceVars[i] + "=" + value + "\n";
+			display += instanceVars[i] + " = " + value + "\n";
 		}
 
 		attributeField.text = display;
 	}
 
-	// Update is called once per frame
 	void Update () {
 
 		objects = PythonInterpreter.scope.GetItems(); // get current objects
+		if (!labelsOn) { // no labels, non-learning settings
+			label.text = "";
+			attributeField.gameObject.SetActive(false);
+			return;
+		}
 
-		if (labelsOn) {
-			RaycastHit hit;
-			if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) {
-				if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
-					attributeField.gameObject.SetActive(true);
-					object instance;
-					if (hit.transform.parent != null) { // if object a part of a larger one, display its name
-						instance = getInstance(hit.transform.parent.gameObject);
-						label.text = hit.transform.parent.name;
-					}
-					else {
-						instance = getInstance(hit.transform.gameObject);
-						label.text = hit.transform.name;
-					}
-
-					label.text = getVarName(instance);  // set label to var name
-
-					ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
-
-					displayInstanceVars(instanceVars, instance);
-
-					label.color = new Color(1, 1,1, 1);
-					float labelScaleX;
-					if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
-						labelScaleX = -.05f;
-					}
-					else {
-						labelScaleX = .05f;
-					}
-					label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
-					label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
-					attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
-					attributeField.transform.position = new Vector3(hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
+		RaycastHit hit;
+		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
+			if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
+				attributeField.gameObject.SetActive(true);
+				object instance;
+				if (hit.transform.parent != null) { // if object a part of a larger one, display its name
+					instance = getInstance(hit.transform.parent.gameObject);
+					label.text = hit.transform.parent.name;
 				}
-			}
-			
-			else {
-				label.text = "";
-				attributeField.gameObject.SetActive(false);
+				else {
+					instance = getInstance(hit.transform.gameObject);
+					label.text = hit.transform.name;
+				}
+
+				label.text = getVarName(instance);  // set label to var name
+
+				ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
+
+				displayInstanceVars(instanceVars, instance);
+
+				label.color = new Color(1, 1,1, 1);
+				float labelScaleX;
+				if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
+					labelScaleX = -.05f;
+				}
+				else {
+					labelScaleX = .05f;
+				}
+				label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
+				label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
+				attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
+				attributeField.transform.position = new Vector3(hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
 			}
 		}
+		
+
+
 	}
 }
 
