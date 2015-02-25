@@ -32,6 +32,8 @@ public class PythonInterpreter : MonoBehaviour {
 		source.Execute(scope); 
 		source = engine.CreateScriptSourceFromFile ("Assets/PythonScripts/cubeCreate.py"); // load any external files in here and execute
 		source.Execute(scope);
+		source = engine.CreateScriptSourceFromFile ("Assets/PythonScripts/Cube.py"); // load any external files in here and execute
+		source.Execute(scope);
 
 	}
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using IronPython;
@@ -85,6 +86,17 @@ public class ObjectLookInput : MonoBehaviour {
 		attributeField.text = display;
 	}
 
+	void displayClassCode(string code) {
+		attributeField.text = code;
+	}
+
+	string getClassCode(string className) {
+		StreamReader source = new StreamReader("Assets/PythonScripts/" + className + ".py");
+		string contents = source.ReadToEnd();
+		source.Close();
+		return contents;
+	}
+
 	void Update () {
 
 		objects = PythonInterpreter.scope.GetItems(); // get current objects
@@ -94,37 +106,42 @@ public class ObjectLookInput : MonoBehaviour {
 
 		RaycastHit hit;
 		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
-						if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
-								attributeField.gameObject.SetActive(true);
-								object instance;
-								if (hit.transform.parent != null) { // if object a part of a larger one, display its name
-										instance = getInstance(hit.transform.parent.gameObject);
-										label.text = hit.transform.parent.name;
-								} else {
-										instance = getInstance(hit.transform.gameObject);
-										label.text = hit.transform.name;
-								}
-								currLookingAt = instance;
-								label.text = getVarName(instance);  // set label to var name
+			if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
+				attributeField.gameObject.SetActive(true);
+				object instance;
+				string className = "";
+				if (hit.transform.parent != null) { // if object a part of a larger one, display its name
+						instance = getInstance(hit.transform.parent.gameObject);
+						className = hit.transform.parent.name;
+				} else {
+						instance = getInstance(hit.transform.gameObject);
+						className = hit.transform.name;
+				}
 
-								ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
+				getClassCode(className);
+				currLookingAt = instance;
+				label.text = getVarName(instance);  // set label to var name
 
-								if (currLookingAt != lastLookingAt)  // allow user to edit text
-									displayInstanceVars(instanceVars, instance);
+				ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
 
-								label.color = new Color (1, 1, 1, 1);
-								float labelScaleX;
-								if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
-										labelScaleX = -.05f;
-								} else {
-										labelScaleX = .05f;
-								}
-								label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
-								label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
-								attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
-								attributeField.transform.position = new Vector3 (hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
-								lastLookingAt = instance;
-						}
+				if (currLookingAt != lastLookingAt) {  // allow user to edit text
+					displayClassCode(getClassCode(className));  // display the code for the class you are looking at
+					//displayInstanceVars(instanceVars, instance);  // display the instance variables for that object
+				}
+
+				label.color = new Color (1, 1, 1, 1);
+				float labelScaleX;
+				if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
+						labelScaleX = -.05f;
+				} else {
+						labelScaleX = .05f;
+				}
+				label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
+				label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
+				attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
+				attributeField.transform.position = new Vector3 (hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
+				lastLookingAt = instance;
+			}
 		} 
 		else {
 			currLookingAt = null;
