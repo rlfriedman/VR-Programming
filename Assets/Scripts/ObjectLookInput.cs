@@ -16,8 +16,12 @@ public class ObjectLookInput : MonoBehaviour {
 	public bool labelsOn = true;
 	IEnumerable objects;
 	ObjectOperations operations;
+	object currLookingAt;
+	object lastLookingAt;
 	
 	void Start () {
+		currLookingAt = null;
+		lastLookingAt = null;
 		objects = PythonInterpreter.scope.GetItems();
 		operations = PythonInterpreter.engine.Operations;
 	}
@@ -91,21 +95,22 @@ public class ObjectLookInput : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
 						if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
-								attributeField.gameObject.SetActive (true);
+								attributeField.gameObject.SetActive(true);
 								object instance;
 								if (hit.transform.parent != null) { // if object a part of a larger one, display its name
-										instance = getInstance (hit.transform.parent.gameObject);
+										instance = getInstance(hit.transform.parent.gameObject);
 										label.text = hit.transform.parent.name;
 								} else {
-										instance = getInstance (hit.transform.gameObject);
+										instance = getInstance(hit.transform.gameObject);
 										label.text = hit.transform.name;
 								}
+								currLookingAt = instance;
+								label.text = getVarName(instance);  // set label to var name
 
-								label.text = getVarName (instance);  // set label to var name
+								ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
 
-								ArrayList instanceVars = getInstanceVars (instance); // all instance variable names
-
-								displayInstanceVars (instanceVars, instance);
+								if (currLookingAt != lastLookingAt)  // allow user to edit text
+									displayInstanceVars(instanceVars, instance);
 
 								label.color = new Color (1, 1, 1, 1);
 								float labelScaleX;
@@ -114,15 +119,18 @@ public class ObjectLookInput : MonoBehaviour {
 								} else {
 										labelScaleX = .05f;
 								}
-								label.transform.localScale = new Vector3 (labelScaleX, .05f, 1f);
-								label.transform.position = new Vector3 (hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
-								attributeField.transform.localScale = new Vector3 (.1f, .05f, 1f);
+								label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
+								label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
+								attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
 								attributeField.transform.position = new Vector3 (hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
+								lastLookingAt = instance;
 						}
 		} 
 		else {
+			currLookingAt = null;
+			lastLookingAt = null;
 			label.text = "";
-			attributeField.gameObject.SetActive (false);
+			attributeField.gameObject.SetActive(false);
 		}
 	}
 }
