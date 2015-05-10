@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using IronPython;
@@ -31,12 +32,17 @@ public class PythonInterpreter : MonoBehaviour {
 	void setupPythonEngine() { // load in existing python classes and execute them so that they are in the scope
 		engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
 		string init = "import UnityEngine as unity";
-		source = engine.CreateScriptSourceFromString (init);
+		source = engine.CreateScriptSourceFromString(init);
 		source.Execute(scope); 
-		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/cubeCreate.py"); 
-		source.Execute(scope);
-		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/Cube.py"); 
-		source.Execute(scope);
+
+		DirectoryInfo pythonDir = new DirectoryInfo("Assets/PythonScripts"); // get all .py files in the scripts dir
+		FileInfo[] pythonFiles = pythonDir.GetFiles("*.py");
+
+		foreach (FileInfo file in pythonFiles) {
+			print (file.ToString());
+			source = engine.CreateScriptSourceFromFile(file.ToString()); 
+			source.Execute(scope);
+		}
 	}
 
 	string[] getCodeLines() {
