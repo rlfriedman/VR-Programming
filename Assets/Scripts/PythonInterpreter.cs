@@ -39,7 +39,6 @@ public class PythonInterpreter : MonoBehaviour {
 		FileInfo[] pythonFiles = pythonDir.GetFiles("*.py");
 
 		foreach (FileInfo file in pythonFiles) {
-			print (file.ToString());
 			source = engine.CreateScriptSourceFromFile(file.ToString()); 
 			source.Execute(scope);
 		}
@@ -105,7 +104,7 @@ public class PythonInterpreter : MonoBehaviour {
 			}
 			catch(Exception e) { // display error message
 				print (e.Message);
-				errors.text = e.Message;
+				errors.text = "Error: " + e.Message;
 			}
 		}
 		lastCodeStr = codeStr;

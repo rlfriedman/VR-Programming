@@ -15,21 +15,22 @@ public class ObjectLookInput : MonoBehaviour {
 	public InputField attributeField;
 	public GameObject playerController;
 	public bool labelsOn = true;
-	IEnumerable objects;
-	ObjectOperations operations;
-	object currLookingAt;
-	object lastLookingAt;
+
+	private IEnumerable objects;
+	private ObjectOperations operations;
+	private object currLookingAt;
+	private object lastLookingAt;
 	
 	void Start () {
 		currLookingAt = null;
 		lastLookingAt = null;
-		objects = PythonInterpreter.scope.GetItems();
+		objects = PythonInterpreter.scope.GetItems(); // get items currently in the python environment from the engine
 		operations = PythonInterpreter.engine.Operations;
 	}
 
 	// get an object's instance variable names
 	ArrayList getInstanceVars(object instance) {  
-		ArrayList instanceVars = new ArrayList ();
+		ArrayList instanceVars = new ArrayList();
 		foreach (var name in operations.GetMemberNames(instance)) {
 			object member = operations.GetMember(instance, name);
 
@@ -129,7 +130,7 @@ public class ObjectLookInput : MonoBehaviour {
 					//displayInstanceVars(instanceVars, instance);  // display the instance variables for that object
 				}
 
-				label.color = new Color (1, 1, 1, 1);
+				label.color = new Color(1, 1, 1, 1);
 				float labelScaleX;
 				if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
 						labelScaleX = -.05f;
@@ -139,7 +140,7 @@ public class ObjectLookInput : MonoBehaviour {
 				label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
 				label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
 				attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
-				attributeField.transform.position = new Vector3 (hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
+				attributeField.transform.position = new Vector3(hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
 				lastLookingAt = instance;
 			}
 		} 
