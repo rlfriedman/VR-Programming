@@ -8,33 +8,35 @@ using IronPython.Modules;
 using Microsoft.Scripting.Hosting;
 
 
-
 public class PythonInterpreter : MonoBehaviour {
 	public InputField input = null;
-	private string codeStr;
-	private string lastCodeStr;
+	public Text errors;
 	public static ScriptEngine engine;
 	public static ScriptScope scope;
 	public static ScriptSource source;
+
+	private string codeStr;
+	private string lastCodeStr;
 
 	private Dictionary<string, GameObject> createdObjects;
 
 	void Start () {
 		codeStr = input.text;
 		lastCodeStr = input.text;
-
 		engine = IronPython.Hosting.Python.CreateEngine(); // setup python engine
 		scope = engine.CreateScope();
+		setupPythonEngine();
+	}
 
+	void setupPythonEngine() { // load in existing python classes and execute them so that they are in the scope
 		engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
 		string init = "import UnityEngine as unity";
 		source = engine.CreateScriptSourceFromString (init);
 		source.Execute(scope); 
-		source = engine.CreateScriptSourceFromFile ("Assets/PythonScripts/cubeCreate.py"); // load any external files in here and execute
+		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/cubeCreate.py"); 
 		source.Execute(scope);
-		source = engine.CreateScriptSourceFromFile ("Assets/PythonScripts/Cube.py"); // load any external files in here and execute
+		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/Cube.py"); 
 		source.Execute(scope);
-
 	}
 
 	string[] getCodeLines() {
@@ -93,9 +95,11 @@ public class PythonInterpreter : MonoBehaviour {
 			clearCreatedObjects();
 			try {
 				source.Execute(scope);
+				errors.text = "";
 			}
-			catch(Exception e) { // should eventually display on screen
+			catch(Exception e) { // display error message
 				print (e.Message);
+				errors.text = e.Message;
 			}
 		}
 		lastCodeStr = codeStr;
