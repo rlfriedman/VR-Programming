@@ -21,7 +21,7 @@ public class PythonInterpreter : MonoBehaviour {
 
 	private Dictionary<string, GameObject> createdObjects;
 
-	void Start () {
+	void Start() {
 		codeStr = input.text;
 		lastCodeStr = input.text;
 		engine = IronPython.Hosting.Python.CreateEngine(); // setup python engine
@@ -31,9 +31,6 @@ public class PythonInterpreter : MonoBehaviour {
 
 	void setupPythonEngine() { // load in existing python classes and execute them so that they are in the scope
 		engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
-		string init = "import UnityEngine as unity";
-		source = engine.CreateScriptSourceFromString(init);
-		source.Execute(scope); 
 
 		DirectoryInfo pythonDir = new DirectoryInfo("Assets/PythonScripts"); // get all .py files in the scripts dir
 		FileInfo[] pythonFiles = pythonDir.GetFiles("*.py");
@@ -50,7 +47,7 @@ public class PythonInterpreter : MonoBehaviour {
 	}
 
 	void destroyGameObjects() {  // destroy any objects not stored in variables
-		GameObject[] objects = FindObjectsOfType<GameObject> ();
+		GameObject[] objects = FindObjectsOfType<GameObject>();
 
 		for (int i = 0; i < objects.Length; i++) {
 			string tag = objects[i].tag;

@@ -98,7 +98,7 @@ public class ObjectLookInput : MonoBehaviour {
 		return contents;
 	}
 
-	void Update () {
+	void Update() {
 
 		objects = PythonInterpreter.scope.GetItems(); // get current objects
 		if (!labelsOn) { // no labels, non-learning settings so don't do anything
