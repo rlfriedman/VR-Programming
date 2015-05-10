@@ -107,7 +107,7 @@ public class ObjectLookInput : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
 			if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
-				attributeField.gameObject.SetActive(true);
+			//	attributeField.gameObject.SetActive(true);
 				object instance;
 				string className = "";
 				if (hit.transform.parent != null) { // if object a part of a larger one, display its name
@@ -125,7 +125,7 @@ public class ObjectLookInput : MonoBehaviour {
 				ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
 
 				if (currLookingAt != lastLookingAt) {  // allow user to edit text
-					displayClassCode(getClassCode(className));  // display the code for the class you are looking at
+					//displayClassCode(getClassCode(className));  // display the code for the class you are looking at
 					//displayInstanceVars(instanceVars, instance);  // display the instance variables for that object
 				}
 

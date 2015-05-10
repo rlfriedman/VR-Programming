@@ -14,7 +14,7 @@ class Sphere():
 		self._color = color
 		self._object = unity.GameObject.CreatePrimitive(unity.PrimitiveType.Sphere)
 		self._object.transform.position = unity.Vector3(x, y, z)
-		self._object.renderer.material.color = self._color
+		self._object.GetComponent(unity.Renderer).material.color = self._color
 
 
 	def changeColor(self, newColor):
@@ -67,7 +67,7 @@ class Tree():
 	def drawBranch(self, x1, y1, z1, x2, y2, z2, color):
 		branch = unity.GameObject("Branch")
 		branch.transform.parent = self._object.transform
-		line = branch.AddComponent("LineRenderer")
+		line = branch.AddComponent(unity.LineRenderer)
 		line.SetPosition(0, unity.Vector3(x1, y1, z1))
 		line.SetPosition(1, unity.Vector3(x2, y2, z2))
 		line.SetWidth(.25, .25)

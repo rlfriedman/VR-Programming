@@ -247,7 +247,7 @@ public class OVRMainMenu : MonoBehaviour
 #if (UNITY_5_0)
 			// TODO: Unity 5.0b11 has an older version of the new GUI being developed in Unity 4.6.
 			// Remove this once Unity 5 has a more recent merge of Unity 4.6.
-	        c.renderMode = RenderMode.World;
+//	        c.renderMode = RenderMode.World;
 #else
 	        c.renderMode = RenderMode.WorldSpace;
 #endif
@@ -966,7 +966,7 @@ public class OVRMainMenu : MonoBehaviour
 #if UNITY_5_0
 		// TODO: Unity 5.0b11 has an older version of the new GUI being developed in Unity 4.6.
 	   	// Remove this once Unity 5 has a more recent merge of Unity 4.6.
-		c.renderMode = RenderMode.World;
+//		c.renderMode = RenderMode.World;
 #else
 		c.renderMode = RenderMode.WorldSpace;
 #endif
