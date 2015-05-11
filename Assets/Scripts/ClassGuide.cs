@@ -16,28 +16,19 @@ public class ClassGuide : MonoBehaviour {
 	private ObjectOperations operations;
 	private IEnumerable objects;
 	private List<ClassInfo> allClassSignatures;
-	public InputField classListings;
+	public GameObject classListings;
+	public Text classListingText;
 
 
 	void Start () {
 		objects = PythonInterpreter.scope.GetItems(); // get items currently in the python environment from the engine
 		operations = PythonInterpreter.engine.Operations;
 		allClassSignatures = generateClassInfo();
-	//	print(allClassSignatures[0].name);
-	//	print (allClassSignatures[0].constructorSignature);
-		//foreach (string sig in allClassSignatures[0].methodSigs) {
-	//		print(sig);
-		//}
 		displayClassInformation();
 
 	}
 
 	List<ClassInfo> generateClassInfo() {
-
-		//object member = operations.GetMember(instance, name);
-		
-		//if (!operations.IsCallable(member) && !(name == "__doc__" || name == "__module__" || name == "_object")) { // found an instance variable!
-		//}
 		List<ClassInfo> classInformation = new List<ClassInfo>();
 
 		foreach(KeyValuePair<string, object> obj in objects) {
@@ -94,25 +85,22 @@ public class ClassGuide : MonoBehaviour {
 		foreach (ClassInfo info in allClassSignatures) {
 			string classSig = "";
 			classSig += info.constructorSignature + "\n";
+			classSig += "Methods: " + "\n";
 			foreach (string sig in info.methodSigs) {
-				classSig += sig + "\n";
+				classSig += "\t" + sig + "\n";
 			}
-			print (classSig);
 			overallInfo += classSig + "\n";
-			classListings.text = classSig;
 
 		}
-		print (overallInfo);
-		classListings.text = overallInfo;
-
+		classListingText.text = overallInfo;
 
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.F1) && !classListings.IsActive()) {
+		if (Input.GetKeyDown(KeyCode.F1) && !classListings.activeSelf) {
 			classListings.gameObject.SetActive(true);
 		}
-		else if (Input.GetKeyDown(KeyCode.F1) && classListings.IsActive()) {
+		else if (Input.GetKeyDown(KeyCode.F1) && classListings.activeSelf) {
 			classListings.gameObject.SetActive(false);
 		}
 

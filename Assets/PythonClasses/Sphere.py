@@ -10,7 +10,7 @@ class Sphere():
 
 
 	def changeColor(self, newColor):
-		self._object.renderer.material.color = newColor
+		self._object.GetComponent(unity.Renderer).material.color = newColor
 
 	def getTransform(self):
 		return self._object.transform
