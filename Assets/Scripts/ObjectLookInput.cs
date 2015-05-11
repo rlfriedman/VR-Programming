@@ -63,7 +63,6 @@ public class ObjectLookInput : MonoBehaviour {
 					// each python class should have a getObject method which returns
 					// the main game object for that class
 					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject");  
-					
 					GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method);
 					if (instanceObj == selectedObj) {
 						return instance;
@@ -92,7 +91,7 @@ public class ObjectLookInput : MonoBehaviour {
 	}
 
 	string getClassCode(string className) {
-		StreamReader source = new StreamReader("Assets/PythonScripts/" + className + ".py");
+		StreamReader source = new StreamReader("Assets/PythonClasses/" + className + ".py");
 		string contents = source.ReadToEnd();
 		source.Close();
 		return contents;

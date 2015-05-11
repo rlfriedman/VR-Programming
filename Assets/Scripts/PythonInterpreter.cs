@@ -21,7 +21,7 @@ public class PythonInterpreter : MonoBehaviour {
 
 	private Dictionary<string, GameObject> createdObjects;
 
-	void Start() {
+	void Awake() {
 		codeStr = input.text;
 		lastCodeStr = input.text;
 		engine = IronPython.Hosting.Python.CreateEngine(); // setup python engine
@@ -31,8 +31,10 @@ public class PythonInterpreter : MonoBehaviour {
 
 	void setupPythonEngine() { // load in existing python classes and execute them so that they are in the scope
 		engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
+		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/InitialSetup.py"); 
+		source.Execute(scope);
 
-		DirectoryInfo pythonDir = new DirectoryInfo("Assets/PythonScripts"); // get all .py files in the scripts dir
+		DirectoryInfo pythonDir = new DirectoryInfo("Assets/PythonClasses"); // get all .py files in the scripts dir
 		FileInfo[] pythonFiles = pythonDir.GetFiles("*.py");
 
 		foreach (FileInfo file in pythonFiles) {
