@@ -60,7 +60,8 @@ public class ClassGuide : MonoBehaviour {
 							var arguments = property.GetValue(method, null) as string[]; // all parameters to the method
 
 							foreach (var arg in arguments) { // parameters
-								memberSignature += arg + " ";
+								if (arg != "self")
+									memberSignature += arg + " ";
 							}
 							memberSignature += ")";
 							if (constructor) {

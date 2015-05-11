@@ -3,6 +3,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
+
+// Written by user "css" on Oculus Developer forum
+// https://forums.oculus.com/viewtopic.php?f=37&t=16710
+
 public class LookInputModule : BaseInputModule {
 	
 	// singleton makes it easy to access the instanced fields from other code without needing a pointer
