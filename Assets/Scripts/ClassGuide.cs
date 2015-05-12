@@ -32,7 +32,7 @@ public class ClassGuide : MonoBehaviour {
 		List<ClassInfo> classInformation = new List<ClassInfo>();
 
 		foreach(KeyValuePair<string, object> obj in objects) {
-			if (obj.Key != "__doc__") {
+			if (obj.Key != "__doc__" && obj.Key != "PythonUnityPrimitive") {
 				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldClass)) { // if the object is a class
 					ClassInfo classInfo = new ClassInfo();
 					classInfo.name = obj.Key;

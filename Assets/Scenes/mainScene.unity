@@ -1909,7 +1909,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22493776, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -17
+      value: -42
       objectReference: {fileID: 0}
     - target: {fileID: 11493762, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
       propertyPath: m_FontData.m_Font
@@ -1964,6 +1964,10 @@ Prefab:
     - target: {fileID: 22493774, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
       propertyPath: m_AnchoredPosition.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22493776, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
