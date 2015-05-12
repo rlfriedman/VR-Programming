@@ -11,3 +11,12 @@ magenta = unity.Color.magenta
 grey = unity.Color.grey
 clear = unity.Color.clear
 cyan = unity.Color.cyan
+
+# sky materials, load first
+greenWithPlanetSky = unity.Resources.Load("Skyboxes/DSGWP")
+redWithPlanetSky = unity.Resources.Load("skyboxes/DSRWP")
+spaceSky = unity.Resources.Load("Skyboxes/Space1")
+cloudySky = unity.Resources.Load("Skyboxes/cloudy")
+sunnySky = unity.Resources.Load("Skyboxes/sunny")
+starrySky =  unity.Resources.Load("Skyboxes/StarSkyBox")
+defaultSky =  unity.Resources.Load("Skyboxes/dawndusk")
