@@ -26,7 +26,9 @@ Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.
 Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.dll into Unity Child Domain
 Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.ExtensionAttribute.dll (this message is harmless)
 Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.ExtensionAttribute.dll into Unity Child Domain
-- Completed reload, in  0.051 seconds
+Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.186 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
@@ -45,6 +47,14 @@ name 'c' is not defined
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
 invalid syntax
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+invalid syntax
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+name 'x' is not defined
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
@@ -101,58 +111,6 @@ unexpected EOF while parsing
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
 unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-unexpected EOF while parsing
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-syntax error
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Cube instance has no attribute 'r'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Cube instance has no attribute 'ro'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Cube instance has no attribute 'rot'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Cube instance has no attribute 'rota'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Cube instance has no attribute 'rotat'
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 

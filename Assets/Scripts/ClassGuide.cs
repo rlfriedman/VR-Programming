@@ -42,7 +42,7 @@ public class ClassGuide : MonoBehaviour {
 						string memberSignature = "";
 						object member = operations.GetMember(classObj, op);
 
-						if (operations.IsCallable(member)) { // if it's a function (a method)
+						if (operations.IsCallable(member) && op != "update") { // if it's a function (a method) and not update which is in all classes
 							if (op == "__init__") { // constructor found
 								memberSignature += classInfo.name + "(";
 								constructor = true;
