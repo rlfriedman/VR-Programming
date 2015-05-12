@@ -18,14 +18,12 @@ public class ClassGuide : MonoBehaviour {
 	private List<ClassInfo> allClassSignatures;
 	public GameObject classListings;
 	public Text classListingText;
-
-
+	
 	void Start () {
 		objects = PythonInterpreter.scope.GetItems(); // get items currently in the python environment from the engine
 		operations = PythonInterpreter.engine.Operations;
 		allClassSignatures = generateClassInfo();
 		displayClassInformation();
-
 	}
 
 	List<ClassInfo> generateClassInfo() {
@@ -76,7 +74,6 @@ public class ClassGuide : MonoBehaviour {
 					}
 					classInformation.Add(classInfo);
 				}
-					
 			}
 		}
 		return classInformation;

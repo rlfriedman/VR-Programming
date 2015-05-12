@@ -20,6 +20,9 @@ public class ObjectLookInput : MonoBehaviour {
 	private ObjectOperations operations;
 	private object currLookingAt;
 	private object lastLookingAt;
+
+	public GameObject attributeScroll;
+	public Text attributeScrollText;
 	
 	void Start () {
 		currLookingAt = null;
@@ -83,7 +86,7 @@ public class ObjectLookInput : MonoBehaviour {
 			display += instanceVars[i] + " = " + value + "\n";
 		}
 
-		attributeField.text = display;
+		attributeScrollText.text = display;
 	}
 
 	void displayClassCode(string code) {
@@ -104,10 +107,12 @@ public class ObjectLookInput : MonoBehaviour {
 			return;
 		}
 
+
+
 		RaycastHit hit;
 		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
 			if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
-			//	attributeField.gameObject.SetActive(true);
+				//attributeField.gameObject.SetActive(true);
 				object instance;
 				string className = "";
 				if (hit.transform.parent != null) { // if object a part of a larger one, display its name
@@ -124,9 +129,18 @@ public class ObjectLookInput : MonoBehaviour {
 
 				ArrayList instanceVars = getInstanceVars(instance); // all instance variable names
 
+
+				if (Input.GetKeyDown(KeyCode.F2) && !attributeScroll.activeSelf) {
+					attributeScroll.gameObject.SetActive(true);
+					attributeScroll.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 3, hit.transform.position.z + 2);
+				}
+				else if (Input.GetKeyDown(KeyCode.F2)) {
+					attributeScroll.gameObject.SetActive(false);
+				}
+
 				if (currLookingAt != lastLookingAt) {  // allow user to edit text
 					//displayClassCode(getClassCode(className));  // display the code for the class you are looking at
-					//displayInstanceVars(instanceVars, instance);  // display the instance variables for that object
+					displayInstanceVars(instanceVars, instance);  // display the instance variables for that object
 				}
 
 				label.color = new Color(1, 1, 1, 1);
@@ -138,8 +152,7 @@ public class ObjectLookInput : MonoBehaviour {
 				}
 				label.transform.localScale = new Vector3(labelScaleX, .05f, 1f);
 				label.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1, hit.transform.position.z);
-				attributeField.transform.localScale = new Vector3(.1f, .05f, 1f);
-				attributeField.transform.position = new Vector3(hit.transform.position.x + 2, hit.transform.position.y, hit.transform.position.z);
+		
 				lastLookingAt = instance;
 			}
 		} 
@@ -147,7 +160,9 @@ public class ObjectLookInput : MonoBehaviour {
 			currLookingAt = null;
 			lastLookingAt = null;
 			label.text = "";
-			attributeField.gameObject.SetActive(false);
+
+			if (Input.GetKeyDown(KeyCode.F2) && attributeScroll.activeSelf)
+				attributeScroll.gameObject.SetActive(false);
 		}
 	}
 }
