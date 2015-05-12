@@ -19,7 +19,7 @@ class Cube():
 		self.moveSpeed = speed
 		self.moving = True
 
-	def rotate(self, speed):
+	def rotate(self, speed = 5):
 		self.rotateSpeed = speed
 		self.rotating = True
 
@@ -44,3 +44,4 @@ class Cube():
 
 		if self.rotating:
 			self._object.transform.Rotate(unity.Vector3.up, self.rotateSpeed * unity.Time.deltaTime)
+
