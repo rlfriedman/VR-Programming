@@ -30,6 +30,7 @@ public class ClassGuide : MonoBehaviour {
 
 	List<ClassInfo> generateClassInfo() {
 		List<ClassInfo> classInformation = new List<ClassInfo>();
+		char[] removeEndChars =  new char[2] {',', ' '};
 
 		foreach(KeyValuePair<string, object> obj in objects) {
 			if (obj.Key != "__doc__" && obj.Key != "PythonUnityPrimitive") {
@@ -61,8 +62,9 @@ public class ClassGuide : MonoBehaviour {
 
 							foreach (var arg in arguments) { // parameters
 								if (arg != "self")
-									memberSignature += arg + " ";
+									memberSignature += arg + ", ";
 							}
+							memberSignature =  memberSignature.TrimEnd(removeEndChars);
 							memberSignature += ")";
 							if (constructor) {
 								classInfo.constructorSignature = memberSignature;
@@ -91,7 +93,6 @@ public class ClassGuide : MonoBehaviour {
 				classSig += "\t" + sig + "\n";
 			}
 			overallInfo += classSig + "\n";
-
 		}
 		classListingText.text = overallInfo;
 

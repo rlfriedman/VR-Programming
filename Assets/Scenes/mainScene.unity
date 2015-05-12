@@ -1922,20 +1922,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11493762, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
       propertyPath: m_Text
-      value: "\r\n\r\nRe: New Unity UI + OVR Look-Based Input\n\r\nPostby ccs \xBB
-        Wed Nov 05, 2014 1:04 pm\r\nI found something I didn't like too much about
-        the built-in slider/scrollbar axis move handling. It is set at a fixed step
-        of 10%. Unfortunately the step size is not user-settable. So I changed around
-        my Input Module to do custom value setting for Sliders and Scrollbars instead
-        of using the built-in move handlers for these components.\r\n\r\nInstead of
-        updating code in original post, I'm just posting a more comprehensive look-based
-        input module in this post. It includes additional features like setting some
-        values to indicate if the input module consumed the button or axis or whether
-        or not the raytracing hit something. This can be useful if you want to multi-purpose
-        a specific axis for other things. I also added a select color. This make it
-        clear which scrollbar/slider is selected when you aren't looking directly
-        at it. You can still manipulate it when you are looking elsewhere with the
-        axis."
+      value: "\r"
       objectReference: {fileID: 0}
     - target: {fileID: 22493766, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
       propertyPath: m_SizeDelta.x
@@ -1968,6 +1955,10 @@ Prefab:
     - target: {fileID: 22493776, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
       propertyPath: m_LocalScale.x
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22493766, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 2000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca8b8f0c9520ea748ae7ee32125c916f, type: 2}
