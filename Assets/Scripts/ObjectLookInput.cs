@@ -12,7 +12,6 @@ using Microsoft.Scripting.Hosting;
 public class ObjectLookInput : MonoBehaviour {
 	public GameObject centerCamera;
 	public Text label;
-	public InputField attributeField;
 	public GameObject playerController;
 	public bool labelsOn = true;
 
@@ -78,7 +77,7 @@ public class ObjectLookInput : MonoBehaviour {
 
 	// displays instance variables on screen near selected object
 	void displayInstanceVars(ArrayList instanceVars, object instance) { 
-		string display = "";
+		string display = "Instance Variables and Values:\n";
 
 		for (int i = 0; i < instanceVars.Count; i++) {
 			string name = (string)instanceVars[i];
@@ -90,7 +89,7 @@ public class ObjectLookInput : MonoBehaviour {
 	}
 
 	void displayClassCode(string code) {
-		attributeField.text = code;
+		attributeScrollText.text = code;
 	}
 
 	string getClassCode(string className) {
@@ -106,8 +105,6 @@ public class ObjectLookInput : MonoBehaviour {
 		if (!labelsOn) { // no labels, non-learning settings so don't do anything
 			return;
 		}
-
-
 
 		RaycastHit hit;
 		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
