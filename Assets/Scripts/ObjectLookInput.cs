@@ -76,8 +76,8 @@ public class ObjectLookInput : MonoBehaviour {
 	}
 
 	// displays instance variables on screen near selected object
-	void displayInstanceVars(ArrayList instanceVars, object instance) { 
-		string display = "Instance Variables and Values:\n";
+	void displayInstanceVars(ArrayList instanceVars, object instance, string className) { 
+		string display = "Instance of class: " + className + "\nInstance Variables and Values:\n";
 
 		for (int i = 0; i < instanceVars.Count; i++) {
 			string name = (string)instanceVars[i];
@@ -109,7 +109,6 @@ public class ObjectLookInput : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (centerCamera.transform.position, centerCamera.transform.forward, out hit)) { // if user looking at an object
 			if (hit.transform.tag != "Scene" && hit.transform.tag != "Player") {
-				//attributeField.gameObject.SetActive(true);
 				object instance;
 				string className = "";
 				if (hit.transform.parent != null) { // if object a part of a larger one, display its name
@@ -137,7 +136,7 @@ public class ObjectLookInput : MonoBehaviour {
 
 				if (currLookingAt != lastLookingAt) {  // allow user to edit text
 					//displayClassCode(getClassCode(className));  // display the code for the class you are looking at
-					displayInstanceVars(instanceVars, instance);  // display the instance variables for that object
+					displayInstanceVars(instanceVars, instance, className);  // display the instance variables for that object
 				}
 
 				label.color = new Color(1, 1, 1, 1);

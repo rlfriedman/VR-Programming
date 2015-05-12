@@ -1104,7 +1104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerCamera: {fileID: 1303300648}
   label: {fileID: 798305018}
-  attributeField: {fileID: 1527551876}
   playerController: {fileID: 1040214344}
   labelsOn: 1
   attributeScroll: {fileID: 464985572}

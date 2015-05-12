@@ -19,3 +19,6 @@ class PythonUnityPrimitive():
 
 	def update(self):
 		pass
+
+	def getTransform(self):
+		return self._object.transform
