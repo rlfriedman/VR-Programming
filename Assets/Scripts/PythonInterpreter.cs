@@ -33,6 +33,8 @@ public class PythonInterpreter : MonoBehaviour {
 		engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
 		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/InitialSetup.py"); 
 		source.Execute(scope);
+		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/PythonUnityPrimitive.py"); 
+		source.Execute(scope);
 
 		DirectoryInfo pythonDir = new DirectoryInfo("Assets/PythonClasses"); // get all .py files in the scripts dir
 		FileInfo[] pythonFiles = pythonDir.GetFiles("*.py");

@@ -18,21 +18,20 @@ public class ClassGuide : MonoBehaviour {
 	private List<ClassInfo> allClassSignatures;
 	public GameObject classListings;
 	public Text classListingText;
-
-
+	
 	void Start () {
 		objects = PythonInterpreter.scope.GetItems(); // get items currently in the python environment from the engine
 		operations = PythonInterpreter.engine.Operations;
 		allClassSignatures = generateClassInfo();
 		displayClassInformation();
-
 	}
 
 	List<ClassInfo> generateClassInfo() {
 		List<ClassInfo> classInformation = new List<ClassInfo>();
+		char[] removeEndChars =  new char[2] {',', ' '};
 
 		foreach(KeyValuePair<string, object> obj in objects) {
-			if (obj.Key != "__doc__") {
+			if (obj.Key != "__doc__" && obj.Key != "PythonUnityPrimitive") {
 				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldClass)) { // if the object is a class
 					ClassInfo classInfo = new ClassInfo();
 					classInfo.name = obj.Key;
@@ -61,8 +60,9 @@ public class ClassGuide : MonoBehaviour {
 
 							foreach (var arg in arguments) { // parameters
 								if (arg != "self")
-									memberSignature += arg + " ";
+									memberSignature += arg + ", ";
 							}
+							memberSignature =  memberSignature.TrimEnd(removeEndChars);
 							memberSignature += ")";
 							if (constructor) {
 								classInfo.constructorSignature = memberSignature;
@@ -74,7 +74,6 @@ public class ClassGuide : MonoBehaviour {
 					}
 					classInformation.Add(classInfo);
 				}
-					
 			}
 		}
 		return classInformation;
@@ -91,7 +90,6 @@ public class ClassGuide : MonoBehaviour {
 				classSig += "\t" + sig + "\n";
 			}
 			overallInfo += classSig + "\n";
-
 		}
 		classListingText.text = overallInfo;
 
