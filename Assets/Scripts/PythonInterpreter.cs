@@ -82,7 +82,7 @@ public class PythonInterpreter : MonoBehaviour {
 
 		foreach (KeyValuePair<string, object> obj in objects) {
 			if (obj.Key != "__doc__")  {
-				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance) && !updatedObjects.Contains(obj.Value)) {
+				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance) && !updatedObjects.Contains(obj.Value) && engine.Operations.GetMember(obj.Value, "update") != null) {
 					string updateCall = obj.Key + ".update()\n";
 					updatedObjects.Add(obj.Value); // don't update already updated objects
 					source = engine.CreateScriptSourceFromString(updateCall);

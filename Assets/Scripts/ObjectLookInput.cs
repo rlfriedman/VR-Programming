@@ -64,10 +64,12 @@ public class ObjectLookInput : MonoBehaviour {
 
 					// each python class should have a getObject method which returns
 					// the main game object for that class
-					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject");  
-					GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method);
-					if (instanceObj == selectedObj) {
-						return instance;
+					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject"); 
+					if (method != null) { // if it has a getObject method it is something that can be looked at
+						GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method);
+						if (instanceObj == selectedObj) {
+							return instance;
+						}
 					}
 				}
 			}
