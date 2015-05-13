@@ -16,12 +16,12 @@ public class PythonInterpreter : MonoBehaviour {
 	public static ScriptScope scope;
 	public static ScriptSource source;
 
-	private string codeStr;
-	private string lastCodeStr;
+	protected string codeStr;
+	protected string lastCodeStr;
 
-	private Dictionary<string, GameObject> createdObjects;
+	protected Dictionary<string, GameObject> createdObjects;
 
-	void Awake() {
+	public void Awake() {
 		codeStr = input.text;
 		lastCodeStr = input.text;
 		engine = IronPython.Hosting.Python.CreateEngine(); // setup python engine
@@ -29,7 +29,7 @@ public class PythonInterpreter : MonoBehaviour {
 		setupPythonEngine();
 	}
 
-	void setupPythonEngine() { // load in existing python classes and execute them so that they are in the scope
+	public void setupPythonEngine() { // load in existing python classes and execute them so that they are in the scope
 		engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
 		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/InitialSetup.py"); 
 		source.Execute(scope);
@@ -45,12 +45,12 @@ public class PythonInterpreter : MonoBehaviour {
 		}
 	}
 
-	string[] getCodeLines() {
+	public string[] getCodeLines() {
 		codeStr = input.text;
 		return codeStr.Split('\n');
 	}
 
-	void destroyGameObjects() {  // destroy any objects not stored in variables
+	public void destroyGameObjects() {  // destroy any objects not stored in variables
 		GameObject[] objects = FindObjectsOfType<GameObject>();
 
 		for (int i = 0; i < objects.Length; i++) {
@@ -61,7 +61,7 @@ public class PythonInterpreter : MonoBehaviour {
 		}
 	}
 
-	void clearCreatedObjects() { // clear world for re-execution of code
+	public void clearCreatedObjects() { // clear world for re-execution of code
 		IEnumerable objects = scope.GetItems();
 		// clear out environment variables
 		// issue with import creating multiple import names...
@@ -75,7 +75,7 @@ public class PythonInterpreter : MonoBehaviour {
 		destroyGameObjects();
 	}
 
-	void UpdateObjects() { // execute each class instance's update function, all must have an update
+	public void UpdateObjects() { // execute each class instance's update function, all must have an update
 
 		IEnumerable objects = scope.GetItems();
 		ArrayList updatedObjects = new ArrayList();
