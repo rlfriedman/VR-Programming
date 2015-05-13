@@ -81,7 +81,7 @@ public class ClassGuide : MonoBehaviour {
 	}
 
 	void displayClassInformation() {
-		string overallInfo = "";
+		string overallInfo = "Available Classes and Methods\n";
 		foreach (ClassInfo info in allClassSignatures) {
 			string classSig = "";
 			classSig += info.constructorSignature + "\n";
