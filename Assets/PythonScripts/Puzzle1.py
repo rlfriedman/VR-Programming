@@ -1,5 +1,5 @@
 # Setup environment for beginning puzzle
 
 
-cube1 = Cube(2, 2, -70, red)
-cube2 = Cube(1, 2, -50, blue)
+firstCube = Cube(-2, 2, -75, red)
+secondCube = Cube(2, 2, -75, blue)

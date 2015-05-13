@@ -1,6 +1,7 @@
 class Sky():
 	def __init__(self):
-		unity.RenderSettings.skybox = defaultSky
+		if unity.RenderSettings.skybox != defaultSky:
+			unity.RenderSettings.skybox = defaultSky
 
 		self._object = None
 
