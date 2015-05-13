@@ -21,7 +21,7 @@ public class Puzzle : PythonInterpreter {
 		engine = IronPython.Hosting.Python.CreateEngine(); // setup python engine
 		scope = engine.CreateScope();
 		setupPythonEngine();
-		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/Puzzle1.py"); 
+		source = engine.CreateScriptSourceFromFile("Assets/PythonPuzzles/Puzzle1.py"); 
 		source.Execute(scope);
 		input.text = "firstCube.setColor(red)";
 	}
@@ -38,7 +38,7 @@ public class Puzzle : PythonInterpreter {
 		engine = IronPython.Hosting.Python.CreateEngine(); // setup python engine
 		scope = engine.CreateScope();
 		setupPythonEngine();
-		source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/Puzzle" + currLevel + ".py"); 
+		source = engine.CreateScriptSourceFromFile("Assets/PythonPuzzles/Puzzle" + currLevel + ".py"); 
 		source.Execute(scope);
 
 	}
@@ -114,7 +114,7 @@ public class Puzzle : PythonInterpreter {
 		if (codeStr != lastCodeStr) {
 			clearCreatedObjects();
 
-			source = engine.CreateScriptSourceFromFile("Assets/PythonScripts/Puzzle" + currLevel + ".py"); 
+			source = engine.CreateScriptSourceFromFile("Assets/PythonPuzzles/Puzzle" + currLevel + ".py"); 
 			source.Execute(scope);
 			source = engine.CreateScriptSourceFromString(codeStr);
 
