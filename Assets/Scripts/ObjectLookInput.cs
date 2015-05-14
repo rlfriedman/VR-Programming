@@ -61,7 +61,7 @@ public class ObjectLookInput : MonoBehaviour {
 			if (obj.Key != "__doc__")  {
 				if (obj.Value.GetType() == typeof(IronPython.Runtime.Types.OldInstance)) {
 					object instance = obj.Value;
-
+	
 					// each python class should have a getObject method which returns
 					// the main game object for that class
 					object method = PythonInterpreter.engine.Operations.GetMember(instance, "getObject"); 

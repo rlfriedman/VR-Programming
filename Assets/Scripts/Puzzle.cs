@@ -35,11 +35,16 @@ public class Puzzle : PythonInterpreter {
 	GameObject getGameObjectForVar(string varName) {
 		object obj;
 		scope.TryGetVariable<object>(varName, out obj);
+
 		if (obj == null) {
 			return null;
 		}
-		if (obj.GetType() == typeof(IronPython.Runtime.Types.OldClass))
+
+		if (obj.GetType() != typeof(IronPython.Runtime.Types.OldInstance)) {
+			print ("fails");
 			return null;
+
+		}
 
 		object method;
 		PythonInterpreter.engine.Operations.TryGetMember(obj, "getObject", out method);  
@@ -92,6 +97,9 @@ public class Puzzle : PythonInterpreter {
 		else if (currLevel == 4) {
 			solved = checkLevel4Cond();
 		}
+		else if (currLevel == 5) {
+			solved = checkLevel5Cond();
+		}
 
 		return solved;
 	}
@@ -115,7 +123,7 @@ public class Puzzle : PythonInterpreter {
 	}
 
 	bool checkLevel3Cond() {
-		// check if the user changed the skybox
+		// check if user made the cube spin
 		object cube = scope.GetVariable("c2");
 
 		string spinning = operations.GetMember(cube, "spinning").ToString();
@@ -126,11 +134,23 @@ public class Puzzle : PythonInterpreter {
 	}
 
 	bool checkLevel4Cond() {
-		// check if the user changed the skybox
+		// check if the user created a cube named c1
 		GameObject cube = getGameObjectForVar("c1");
 
 		if (cube != null) {
 			if (cube.name == "Cube") {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool checkLevel5Cond() {
+		// check if the user changed the weather and created a snowman
+		GameObject snowman = getGameObjectForVar("snow");
+
+		if (snowman != null) {
+			if (snowman.name == "Snowman" && GameObject.Find("Snow(Clone)") != null) {
 				return true;
 			}
 		}
@@ -154,6 +174,10 @@ public class Puzzle : PythonInterpreter {
 			puzzleText.text = "Awesome! Now we can both create and interact with objects. " +
 				"Objects you create are instances of the class you create them from.";
 		}
+		else if (currLevel == 5) {
+			puzzleTextRight.text = "";
+			puzzleText.text = "It's getting a little chilly in here! Good work combining your skills! F3 to move on.";
+		}
 	}
 
 	void setupLevel2() {
@@ -172,8 +196,15 @@ public class Puzzle : PythonInterpreter {
 	void setupLevel4() {
 		input.text = "s = Sphere(0, 3, -70, yellow)";
 		puzzleText.text = "Now you know how to interact with objects. But how do you create them?";
-		puzzleTextRight.text = "The sphere in front of you exists because of the code in front of you." +
-			"Can you create a cube named c1 in the same way?";
+		puzzleTextRight.text = "The sphere in front of you exists as a result of the code you see." +
+			"Can you create a cube named c1 in the same way? Cubes require an x, y, z and a color.";
+	}
+
+	void setupLevel5() {
+		input.text = "weather = Weather()\nweather.setWeather(\"rain\")";
+		puzzleText.text = "Looks like it's a little rainy! I'd prefer snow. Can you help with that?";
+		puzzleTextRight.text = "The Weather class has a method setWeather which requires a word in quotes representing the weather." +
+			"After you change the weather, could you make a snowman for me too? Call it snow.";
 	}
 
 	void nextLevel() {
@@ -191,6 +222,9 @@ public class Puzzle : PythonInterpreter {
 		else if (currLevel == 4) {
 			setupLevel4();
 		}
+		else if (currLevel == 5) {
+			setupLevel5();
+		}
 	}
 
 	void Update () {
@@ -198,11 +232,9 @@ public class Puzzle : PythonInterpreter {
 		if (levelCompleted && Input.GetKeyDown(KeyCode.F3)) {
 			nextLevel();
 		}
-
 		codeStr = input.text;
 		UpdateObjects();
 
-		
 		if (codeStr != lastCodeStr) {
 			clearCreatedObjects();
 
