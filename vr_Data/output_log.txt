@@ -2,40 +2,40 @@ Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 970 (ID=0x13c2)
+    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
     Vendor:   NVIDIA
     VRAM:     3072 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.Modules.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.Modules.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Dynamic.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Dynamic.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Core.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Core.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Debugging.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Debugging.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.dll into Unity Child Domain
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.ExtensionAttribute.dll (this message is harmless)
-Loading E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.ExtensionAttribute.dll into Unity Child Domain
-- Completed reload, in  0.050 seconds
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.Modules.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\IronPython.Modules.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Dynamic.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Dynamic.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Core.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Core.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Debugging.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.Debugging.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.dll into Unity Child Domain
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.ExtensionAttribute.dll (this message is harmless)
+Loading C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Microsoft.Scripting.ExtensionAttribute.dll into Unity Child Domain
+- Completed reload, in  0.038 seconds
 <RI> Initializing input.
 <RI> Input initialized.
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+desktop: 1920x1080 50Hz; virtual: 1920x1080 at 0,0
 <RI> Initialized touch support.
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\System.dll (this message is harmless)
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\System.Configuration.dll (this message is harmless)
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\System.Xml.dll (this message is harmless)
-Platform assembly: E:\Documents\GitHub\VR-Programming\vr_Data\Managed\Mono.Security.dll (this message is harmless)
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\System.Configuration.dll (this message is harmless)
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\System.Xml.dll (this message is harmless)
+Platform assembly: C:\Users\rlfriedm\Documents\GitHub\VR-Programming\vr_Data\Managed\Mono.Security.dll (this message is harmless)
 unexpected EOF while parsing
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
@@ -92,59 +92,11 @@ unexpected EOF while parsing
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
-Sky instance has no attribute 'setCloud'
+unexpected EOF while parsing
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
-Sky instance has no attribute 'setClou'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setClo'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setCl'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setC'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'set'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setR'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setRe'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setRed'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setRedP'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setRedPl'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setRedPla'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setRedPlan'
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
-
-Sky instance has no attribute 'setRedPlane'
+unexpected EOF while parsing
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
