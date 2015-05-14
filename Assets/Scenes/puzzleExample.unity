@@ -1023,6 +1023,72 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 798305016}
+--- !u!1 &836281892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 836281893}
+  - 222: {fileID: 836281895}
+  - 114: {fileID: 836281894}
+  m_Layer: 5
+  m_Name: PuzzleTextRight
+  m_TagString: Scene
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &836281893
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836281892}
+  m_LocalRotation: {x: 0, y: .275637388, z: 0, w: .96126169}
+  m_LocalPosition: {x: 0, y: 0, z: 19}
+  m_LocalScale: {x: .100000009, y: .100000001, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1157370515}
+  m_RootOrder: 7
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 100, y: 68}
+  m_SizeDelta: {x: 600, y: 200}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &836281894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836281892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: dad5f68bbf2f9b64cb3c2763ae0b16a0, type: 3}
+    m_FontSize: 60
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &836281895
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 836281892}
 --- !u!114 &842405202
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11493762, guid: ca8b8f0c9520ea748ae7ee32125c916f,
@@ -1061,7 +1127,10 @@ MonoBehaviour:
   input: {fileID: 127853258}
   errors: {fileID: 62266103}
   puzzleText: {fileID: 1305808325}
+  puzzleTextRight: {fileID: 836281894}
   redSpaceSky: {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
+  defaultSky: {fileID: 2100000, guid: 9ba05f538ee36044da5cd2a4f14a8b18, type: 2}
+  fade: {fileID: 1483830219}
 --- !u!1 &1103367808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,8 +1260,9 @@ RectTransform:
   - {fileID: 550118080}
   - {fileID: 464985573}
   - {fileID: 1305808324}
+  - {fileID: 836281893}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1790,7 +1860,7 @@ GameObject:
   - 23: {fileID: 2088529693}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Scene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
