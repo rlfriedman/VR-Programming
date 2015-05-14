@@ -176,7 +176,7 @@ public class Puzzle : PythonInterpreter {
 		}
 		else if (currLevel == 5) {
 			puzzleTextRight.text = "";
-			puzzleText.text = "It's getting a little chilly in here! Good work combining your skills! F3 to move on.";
+			puzzleText.text = "It's getting a little chilly in here! Good work combining your skills! That's all for now!";
 		}
 	}
 
@@ -229,7 +229,7 @@ public class Puzzle : PythonInterpreter {
 
 	void Update () {
 
-		if (levelCompleted && Input.GetKeyDown(KeyCode.F3)) {
+		if (levelCompleted && Input.GetKeyDown(KeyCode.F3) && !(currLevel == 5)) {
 			nextLevel();
 		}
 		codeStr = input.text;
