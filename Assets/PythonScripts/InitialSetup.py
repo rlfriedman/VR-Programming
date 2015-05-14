@@ -21,7 +21,11 @@ sunnySky = unity.Resources.Load("Skyboxes/sunny")
 starrySky =  unity.Resources.Load("Skyboxes/StarSkyBox")
 defaultSky =  unity.Resources.Load("Skyboxes/dawndusk")
 
+# reset weather
 rain = unity.Object.Instantiate(unity.Resources.Load("Weather/rain"))
 snow = unity.Object.Instantiate(unity.Resources.Load("Weather/snow"))
 rain.gameObject.SetActive(False)
 snow.gameObject.SetActive(False)
+
+# reset skybox
+unity.RenderSettings.skybox = defaultSky

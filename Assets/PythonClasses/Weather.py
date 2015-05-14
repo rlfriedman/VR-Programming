@@ -2,6 +2,7 @@ class Weather():
 	def __init__(self):
 		self._status = "Sunny"
 		self._lastStatus = "Sunny"
+		
 
 	def setWeather(self, weatherString):
 		self._lastStatus = self._status

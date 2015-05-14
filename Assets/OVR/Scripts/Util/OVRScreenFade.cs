@@ -70,6 +70,12 @@ public class OVRScreenFade : MonoBehaviour
 		StartCoroutine(FadeIn());
 	}
 
+	public void startFade() {
+		fadeMaterial = (fadeShader != null) ? new Material(fadeShader) : new Material(Shader.Find("Transparent/Diffuse"));
+		StartCoroutine(FadeIn());
+
+	}
+
 	/// <summary>
 	/// Cleans up the fade material
 	/// </summary>
