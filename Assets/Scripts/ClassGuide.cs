@@ -1,3 +1,6 @@
+// Rachel Friedman 
+// May 2015
+
 using UnityEngine;
 using UnityEngine.UI;
 using System;
@@ -10,6 +13,7 @@ using IronPython.Runtime;
 using Microsoft.Scripting.Hosting;
 using System.Reflection;
 
+// Generates a menu filled with class information - methods and constructors and what parameters they require 
 public class ClassGuide : MonoBehaviour {
 	public GameObject playerController;
 	private ArrayList classInfo;
@@ -58,7 +62,7 @@ public class ClassGuide : MonoBehaviour {
 							PropertyInfo property = methodType.GetProperty("ArgNames",  BindingFlags.Instance | BindingFlags.NonPublic);
 							var arguments = property.GetValue(method, null) as string[]; // all parameters to the method
 
-							foreach (var arg in arguments) { // parameters
+							foreach (var arg in arguments) { // parameters, add to the string for the method
 								if (arg != "self")
 									memberSignature += arg + ", ";
 							}
@@ -82,6 +86,7 @@ public class ClassGuide : MonoBehaviour {
 
 	void displayClassInformation() {
 		string overallInfo = "Available Classes and Methods\n";
+
 		foreach (ClassInfo info in allClassSignatures) {
 			string classSig = "";
 			classSig += info.constructorSignature + "\n";
@@ -96,7 +101,7 @@ public class ClassGuide : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.F1) && !classListings.activeSelf) {
+		if (Input.GetKeyDown(KeyCode.F1) && !classListings.activeSelf) { // display the menu
 			classListings.gameObject.SetActive(true);
 		}
 		else if (Input.GetKeyDown(KeyCode.F1) && classListings.activeSelf) {

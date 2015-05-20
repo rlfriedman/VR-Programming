@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Rachel Friedman 
+// May 2015
+
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
@@ -14,15 +17,14 @@ public class ObjectLookInput : MonoBehaviour {
 	public Text label;
 	public GameObject playerController;
 	public bool labelsOn = true;
+	public GameObject attributeScroll;
+	public Text attributeScrollText;
 
 	private IEnumerable objects;
 	private ObjectOperations operations;
 	private object currLookingAt;
 	private object lastLookingAt;
 
-	public GameObject attributeScroll;
-	public Text attributeScrollText;
-	
 	void Start () {
 		currLookingAt = null;
 		lastLookingAt = null;
@@ -136,14 +138,14 @@ public class ObjectLookInput : MonoBehaviour {
 					attributeScroll.gameObject.SetActive(false);
 				}
 
-				if (currLookingAt != lastLookingAt) {  // allow user to edit text
-					//displayClassCode(getClassCode(className));  // display the code for the class you are looking at
+				if (currLookingAt != lastLookingAt) {  
+					//displayClassCode(getClassCode(className));  // could have this display class code for object
 					displayInstanceVars(instanceVars, instance, className);  // display the instance variables for that object
 				}
 
 				label.color = new Color(1, 1, 1, 1);
 				float labelScaleX;
-				if (playerController.transform.position.z > hit.transform.position.z) {  // orient label based on pos in world
+				if (playerController.transform.position.z > hit.transform.position.z) {  // basic orient label based on pos in world
 						labelScaleX = -.05f;
 				} else {
 						labelScaleX = .05f;
@@ -159,7 +161,7 @@ public class ObjectLookInput : MonoBehaviour {
 			lastLookingAt = null;
 			label.text = "";
 
-			if (Input.GetKeyDown(KeyCode.F2) && attributeScroll.activeSelf)
+			if (Input.GetKeyDown(KeyCode.F2) && attributeScroll.activeSelf) // hide attribute display
 				attributeScroll.gameObject.SetActive(false);
 		}
 	}

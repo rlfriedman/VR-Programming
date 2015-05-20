@@ -1,3 +1,6 @@
+// Rachel Friedman 
+// May 2015
+
 using System.Collections;
 using System.Collections.Generic;
 

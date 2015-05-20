@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Rachel Friedman 
+// May 2015
+
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
@@ -16,7 +19,6 @@ public class Puzzle : PythonInterpreter {
 	private bool levelCompleted = false; 
 	public Material redSpaceSky;
 	public Material defaultSky;
-	public OVRScreenFade fade;
 	private ObjectOperations operations;
 
 	public void Awake() {
@@ -32,31 +34,29 @@ public class Puzzle : PythonInterpreter {
 
 	}
 
-	GameObject getGameObjectForVar(string varName) {
+	GameObject getGameObjectForVar(string varName) {  // gets the GameObject represented by some variable
 		object obj;
 		scope.TryGetVariable<object>(varName, out obj);
 
-		if (obj == null) {
+		if (obj == null) { // no variable varName
 			return null;
 		}
 
-		if (obj.GetType() != typeof(IronPython.Runtime.Types.OldInstance)) {
-			print ("fails");
+		if (obj.GetType() != typeof(IronPython.Runtime.Types.OldInstance)) { // variable not storing an instance of a class
 			return null;
-
 		}
 
 		object method;
 		PythonInterpreter.engine.Operations.TryGetMember(obj, "getObject", out method);  
 
-		if (method == null) {
+		if (method == null) { // no getObject method
 			return null;
 		}
-		GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method);
+		GameObject instanceObj = (GameObject) PythonInterpreter.engine.Operations.Invoke(method); // call the getObject method and return the obj
 		return instanceObj;
 	}
 
-	void resetWeather() {
+	void resetWeather() { // function to resetWeather on level change
 		GameObject rain = GameObject.Find("Rain(Clone)");
 		GameObject snow = GameObject.Find("Snow(Clone)");
 		if (rain != null) {
@@ -77,12 +77,11 @@ public class Puzzle : PythonInterpreter {
 		puzzleText.text = "";
 		resetWeather(); //  makes sure weather doesn't persist after level reset
 		resetSkybox(); //   makes sure skybox goes back to default
-		source = engine.CreateScriptSourceFromFile("Assets/PythonPuzzles/Puzzle" + currLevel + ".py"); 
+		source = engine.CreateScriptSourceFromFile("Assets/PythonPuzzles/Puzzle" + currLevel + ".py"); // pre-load Python code for the level
 		source.Execute(scope);
-		fade.startFade();
 	}
 
-	bool checkPuzzleComplete() {
+	bool checkPuzzleComplete() { // check to see if current puzzle is completed
 		bool solved = false;
 		if (currLevel == 1) {
 			solved = checkLevel1Cond();
@@ -90,7 +89,6 @@ public class Puzzle : PythonInterpreter {
 		else if (currLevel == 2) {
 			solved = checkLevel2Cond();
 		}
-
 		else if (currLevel == 3) {
 			solved = checkLevel3Cond();
 		}
@@ -100,7 +98,6 @@ public class Puzzle : PythonInterpreter {
 		else if (currLevel == 5) {
 			solved = checkLevel5Cond();
 		}
-
 		return solved;
 	}
 
@@ -115,7 +112,6 @@ public class Puzzle : PythonInterpreter {
 
 	bool checkLevel2Cond() {
 		// check if the user changed the skybox
-
 		if (RenderSettings.skybox == redSpaceSky) {
 			return true;
 		}
@@ -157,7 +153,7 @@ public class Puzzle : PythonInterpreter {
 		return false;
 	}
 
-	void displayLevelCompleted() {
+	void displayLevelCompleted() { // set puzzle text to proper response for level completion
 		if (currLevel == 1) {
 			puzzleText.text = "Great, you will get the hang of this in no time! \n\nPress F3 to move on.";
 		}
@@ -207,7 +203,7 @@ public class Puzzle : PythonInterpreter {
 			"After you change the weather, could you make a snowman for me too? Call it snow.";
 	}
 
-	void nextLevel() {
+	void nextLevel() { // setup the next level
 		currLevel += 1;
 		levelCompleted = false;
 		clearCreatedObjects();
@@ -228,17 +224,17 @@ public class Puzzle : PythonInterpreter {
 	}
 
 	void Update () {
-
-		if (levelCompleted && Input.GetKeyDown(KeyCode.F3) && !(currLevel == 5)) {
+		if (levelCompleted && Input.GetKeyDown(KeyCode.F3) && !(currLevel == 5)) { // if level completed, go to next on until hit max level
 			nextLevel();
 		}
+
 		codeStr = input.text;
 		UpdateObjects();
 
 		if (codeStr != lastCodeStr) {
 			clearCreatedObjects();
 
-			source = engine.CreateScriptSourceFromFile("Assets/PythonPuzzles/Puzzle" + currLevel + ".py"); 
+			source = engine.CreateScriptSourceFromFile("Assets/PythonPuzzles/Puzzle" + currLevel + ".py"); // assumes each level has a Puzzle#.py file
 			source.Execute(scope);
 			source = engine.CreateScriptSourceFromString(codeStr);
 

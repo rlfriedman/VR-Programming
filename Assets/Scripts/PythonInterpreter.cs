@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Rachel Friedman 
+// May 2015
+
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
@@ -18,7 +21,7 @@ public class PythonInterpreter : MonoBehaviour {
 
 	protected string codeStr;
 	protected string lastCodeStr;
-
+	protected string lastWorkingCode;
 	protected Dictionary<string, GameObject> createdObjects;
 
 	public void Awake() {
@@ -50,7 +53,7 @@ public class PythonInterpreter : MonoBehaviour {
 		return codeStr.Split('\n');
 	}
 
-	public void destroyGameObjects() {  // destroy any objects not stored in variables
+	public void destroyGameObjects() {  // destroy all game objects that have been created
 		GameObject[] objects = FindObjectsOfType<GameObject>();
 
 		for (int i = 0; i < objects.Length; i++) {
@@ -75,7 +78,7 @@ public class PythonInterpreter : MonoBehaviour {
 		destroyGameObjects();
 	}
 
-	public void UpdateObjects() { // execute each class instance's update function, all must have an update
+	public void UpdateObjects() { // execute each class instance's update function if it has one
 
 		IEnumerable objects = scope.GetItems();
 		ArrayList updatedObjects = new ArrayList();
@@ -102,10 +105,16 @@ public class PythonInterpreter : MonoBehaviour {
 			try {
 				source.Execute(scope);
 				errors.text = "";
+				lastWorkingCode = codeStr;
 			}
 			catch(Exception e) { // display error message
 				print (e.Message);
 				errors.text = "Error: " + e.Message;
+				if (lastWorkingCode != null) { // run the last working code instead of current code
+					source = engine.CreateScriptSourceFromString(lastWorkingCode);
+					source.Execute(scope);
+				}
+
 			}
 		}
 		lastCodeStr = codeStr;
