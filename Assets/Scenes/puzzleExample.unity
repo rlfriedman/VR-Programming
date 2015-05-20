@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1040214344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fa9a7b02c15ad448a6591227727c64, type: 3}
+  m_Script: {fileID: 11500000, guid: a7898329825507744b1b11349a133db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 127853258}
@@ -1130,7 +1130,6 @@ MonoBehaviour:
   puzzleTextRight: {fileID: 836281894}
   redSpaceSky: {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
   defaultSky: {fileID: 2100000, guid: 9ba05f538ee36044da5cd2a4f14a8b18, type: 2}
-  fade: {fileID: 1483830219}
 --- !u!1 &1103367808
 GameObject:
   m_ObjectHideFlags: 0

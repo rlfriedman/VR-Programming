@@ -12,7 +12,7 @@ using IronPython.Modules;
 using Microsoft.Scripting.Hosting;
 
 // version of the overall python code update system that accounts for pre-loaded environment objects to setup for a puzzle
-public class Puzzle : PythonInterpreter {
+public class PuzzleEnvironment : PythonInterpreter {
 	public Text puzzleText;
 	public Text puzzleTextRight;
 	private int currLevel = 1;
@@ -241,10 +241,15 @@ public class Puzzle : PythonInterpreter {
 			try {
 				source.Execute(scope);
 				errors.text = "";
+				lastWorkingCode = codeStr;
 			}
 			catch(Exception e) { // display error message
 				print (e.Message);
 				errors.text = "Error: " + e.Message;
+				if (lastWorkingCode != null) { // run the last working code instead of current code
+					source = engine.CreateScriptSourceFromString(lastWorkingCode);
+					source.Execute(scope);
+				}
 			}
 
 			if (checkPuzzleComplete()) {
